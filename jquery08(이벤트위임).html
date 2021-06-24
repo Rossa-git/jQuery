@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/jquery.js"></script>
+</head>
+<body>
+
+    <h3>li에 동일한 이벤트를 등록</h3>
+
+    <ul id="test">
+        <li>태그1</li>
+        <li>태그2</li>
+        <li>태그3</li>
+    </ul>
+
+    <script>
+        //1st - for문을 이용해 하나하나 지정해주는 방식
+        // var tag = document.querySelectorAll("#test li");
+        // for(var i =0; i < tag.length; i++) {
+        //     tag[i].onclick = function() {
+        //         alert(1);
+        //     }
+        // }
+
+        //1st - jquery
+        // $("#test li").click(function(){
+        //     console.log($(this).html() ); //제이쿼리의 실행대상 선택방법
+        // })
+
+        //2nd - 부모에게 이벤트를 넣어 위임하는 방식
+        // var test = document.getElementById("test");
+        // test.onclick = function() {
+        //     if(event.target.tagName != "LI") return;
+        //     console.log(1);
+        // }
+
+        //2nd - jquery
+        $("#test").on("click", "li", function() {
+            console.log(2)
+        });
+    </script>
+
+    <div id="box">
+        <!-- 비워둠 -->
+    </div>
+
+
+    <script>
+        $(document).ready(function() {
+
+            //on방식이 아닌 일반 이벤트 등록방법
+            // $("#box a").click(function(){
+            //     event.preventDefault();
+            //     alert("실행될까?");      //실행되지 않는다. #box a는 이 명령줄에서도 그려지기 전이기 때문
+            // });
+
+
+            $("#box").on("click", "a", function() {
+                event.preventDefault();
+                alert("실행될까?");  //실행된다. 이 이벤트는 비동기 방식에서 유용하게 사용될 것이다.
+            })
+
+            var str = "";
+            str += '<a href="#">태그1</a>';
+            str += '<a href="#">태그2</a>';
+            str += '<a href="#">태그3</a>';
+
+            $("#box").html(str);
+        })
+    </script>
+</body>
+</html>
